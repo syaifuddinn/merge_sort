@@ -1,0 +1,57 @@
+#include <iostream>
+using namespace std;
+void merge(int data[],int awal,int akhir)
+{
+	if(awal<akhir)
+	{
+		int tengah=(awal+akhir)/2;
+		merge(data,awal,tengah);
+		merge(data,tengah+1,akhir);
+		int i=awal;
+		int j=tengah+1;
+		int k=awal;
+		int data_tampung[akhir+1];
+		while(i<=tengah&&j<=akhir)
+		{
+			if(data[i]<data[j])
+			{
+				data_tampung[k]=data[i];
+				i++;
+			}
+			else
+			{
+				data_tampung[k]=data[j];
+				j++;
+			}
+			k++;
+			
+		}
+		while(i<=tengah)
+		{
+			data_tampung[k]=data[i];
+			i++;
+			k++;
+		}
+		while(j<=akhir)
+		{
+			data_tampung[k]=data[j];
+			j++;
+			k++;
+		}
+		for(int l=0;l<=akhir;l++)
+		{
+			data[l]=data_tampung[l];
+		}
+	}
+}
+int main(int argc, char** argv) {
+	int Data[]={6,5,3,1,8,7,2,4};
+	int awal=0;
+	int akhir=sizeof(Data)/sizeof(int);
+	merge(Data,awal,akhir-1);
+	for(int i=0;i<=akhir;i++)
+	{
+		cout<<i<<" ";
+	}
+	return 0;
+}
